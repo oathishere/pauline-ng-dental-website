@@ -34,13 +34,14 @@ export default function Navbar() {
   const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, path: string) => {
     e.preventDefault();
     setIsOpen(false);
-    const element = document.getElementById(path.substring(1));
-    if (element) {
-      window.scrollTo({
-        top: element.offsetTop - 80,
-        behavior: 'smooth'
-      });
-    }
+    
+    // Use a small timeout to allow the mobile menu to close before calculating scroll position
+    setTimeout(() => {
+      const element = document.getElementById(path.substring(1));
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
+    }, 50);
   };
 
   return (
